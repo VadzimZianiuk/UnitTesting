@@ -1,8 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using NUnit.Framework;
 using RecentlyUsedListKata;
+using System;
+using System.Collections.Generic;
 
 namespace RecentlyUsedListKataTests
 {
@@ -28,7 +27,7 @@ namespace RecentlyUsedListKataTests
         {
             var recentlyUsedList = new RecentlyUsedList(UsedListData.Count);
             int expectedCount = 0;
-            
+
             Assert.AreEqual(expectedCount, recentlyUsedList.Count);
             UsedListData.ForEach(x =>
             {
@@ -52,7 +51,20 @@ namespace RecentlyUsedListKataTests
         }
 
         [Test]
-        public void Push_Throw_InvalidOperationException()
+        public void PushDuplicate_Indexer()
+        {
+            var recentlyUsedList = new RecentlyUsedList(UsedListData.Count);
+
+            UsedListData.ForEach(x => recentlyUsedList.Push(x));
+            UsedListData.ForEach(x =>
+            {
+                recentlyUsedList.Push(x);
+                Assert.AreEqual(x, recentlyUsedList[0]);
+            });
+        }
+
+        [Test]
+        public void Push_Throw_OverflowException()
         {
             int capacity = 1;
             var recentlyUsedList = new RecentlyUsedList(capacity);
@@ -61,7 +73,16 @@ namespace RecentlyUsedListKataTests
                 recentlyUsedList.Push($"{capacity}");
             }
 
-            Assert.Throws<InvalidOperationException>(() => recentlyUsedList.Push($"{capacity}"));
+            Assert.Throws<OverflowException>(() => recentlyUsedList.Push($"{capacity}"));
+        }
+
+        [TestCase(null)]
+        [TestCase("")]
+        [TestCase("    ")]
+        public void Push_Throw_ArgumentException(string item)
+        {
+            var recentlyUsedList = new RecentlyUsedList();
+            Assert.Throws<ArgumentException>(() => recentlyUsedList.Push(item));
         }
 
         [Test]
@@ -73,7 +94,7 @@ namespace RecentlyUsedListKataTests
             {
                 recentlyUsedList.Push($"{i}");
             }
-            
+
             while (capacity-- > 0)
             {
                 recentlyUsedList.Pop();
@@ -81,7 +102,6 @@ namespace RecentlyUsedListKataTests
 
             Assert.Throws<InvalidOperationException>(() => recentlyUsedList.Pop());
         }
-
 
         [Test]
         public void Indexer()
@@ -104,6 +124,24 @@ namespace RecentlyUsedListKataTests
         {
             var recentlyUsedList = new RecentlyUsedList();
             Assert.Throws<ArgumentOutOfRangeException>(() => _ = recentlyUsedList[index]);
+        }
+
+        [Test]
+        public void Enumerable()
+        {
+            var recentlyUsedList = new RecentlyUsedList(UsedListData.Count);
+
+            int i = UsedListData.Count;
+            while (--i >= 0)
+            {
+                recentlyUsedList.Push(UsedListData[i]);
+            }
+
+            i = 0;
+            foreach (var data in recentlyUsedList)
+            {
+                Assert.AreEqual(UsedListData[i++], data);
+            }
         }
     }
 }

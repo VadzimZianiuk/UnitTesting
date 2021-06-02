@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using LCDDigitsKata;
 using NUnit.Framework;
@@ -10,41 +11,41 @@ namespace LCDDigitsKataTests
         {
             get
             {
-                yield return new TestCaseData(0, "._." +
-                                                 "|.|" +
+                yield return new TestCaseData(0, "._." + Environment.NewLine + 
+                                                 "|.|" + Environment.NewLine +
                                                  "|_|");
-                yield return new TestCaseData(1, "..." +
-                                                 "..|" +
+                yield return new TestCaseData(1, "..." + Environment.NewLine +
+                                                 "..|" + Environment.NewLine +
                                                  "..|");
-                yield return new TestCaseData(2, "._." +
-                                                 "._|" +
+                yield return new TestCaseData(2, "._." + Environment.NewLine +
+                                                 "._|" + Environment.NewLine +
                                                  "|_.");
-                yield return new TestCaseData(3, "._." +
-                                                 "._|" +
+                yield return new TestCaseData(3, "._." + Environment.NewLine +
+                                                 "._|" + Environment.NewLine +
                                                  "._|");
-                yield return new TestCaseData(4, "..." +
-                                                 "|_|" +
+                yield return new TestCaseData(4, "..." + Environment.NewLine +
+                                                 "|_|" + Environment.NewLine +
                                                  "..|");
-                yield return new TestCaseData(5, "._." +
-                                                 "|_." +
+                yield return new TestCaseData(5, "._." + Environment.NewLine +
+                                                 "|_." + Environment.NewLine +
                                                  "._|");
-                yield return new TestCaseData(6, "._." +
-                                                 "|_." +
+                yield return new TestCaseData(6, "._." + Environment.NewLine +
+                                                 "|_." + Environment.NewLine +
                                                  "|_|");
-                yield return new TestCaseData(7, "._." +
-                                                 "..|" +
+                yield return new TestCaseData(7, "._." + Environment.NewLine +
+                                                 "..|" + Environment.NewLine +
                                                  "..|");
-                yield return new TestCaseData(8, "._." +
-                                                 "|_|" +
+                yield return new TestCaseData(8, "._." + Environment.NewLine +
+                                                 "|_|" + Environment.NewLine +
                                                  "|_|");
-                yield return new TestCaseData(9, "._." +
-                                                 "|_|" +
+                yield return new TestCaseData(9, "._." + Environment.NewLine +
+                                                 "|_|" + Environment.NewLine +
                                                  "..|");
-                yield return new TestCaseData(-1, "    ..." +
-                                                  "--- ..|" +
+                yield return new TestCaseData(-1, "    ..." + Environment.NewLine +
+                                                  "--- ..|" + Environment.NewLine +
                                                   "    ..|");
-                yield return new TestCaseData(910, "._. ... ._." +
-                                                   "|_| ..| |.|" +
+                yield return new TestCaseData(910, "._. ... ._." + Environment.NewLine +
+                                                   "|_| ..| |.|" + Environment.NewLine +
                                                    "..| ..| |_|");
             }
         }
